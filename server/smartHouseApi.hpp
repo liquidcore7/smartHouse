@@ -58,13 +58,14 @@ shServer::shServer(PinCtrl &pinboard, int port) : loggedIPs{} {
 	{
 		if (authenticated(request->remote_endpoint_address)) {
 			int val;
-			if (request->content.string() == "ON")
+			std::string state = request->content.string();
+			if (state == "ON")
 				val = 1;
-			else if (request->content.string() == "OFF")
+			else if (state == "OFF")
 				val = 0;
 			else
 				val = -1;
-			if (val > -1) {
+			if (val != -1) {
 				pinboard.getPin(2)->set(val);
 				log_message("User switched light1", 'S', logger);
 				*response << "HTTP/1.1 200 OK\r\nContent-Length: " << 5 << "\r\n\r\n" << val
@@ -86,13 +87,14 @@ shServer::shServer(PinCtrl &pinboard, int port) : loggedIPs{} {
 	{
 		if (authenticated(request->remote_endpoint_address)) {
 			int val;
-			if (request->content.string() == "ON")
+			std::string state = request->content.string();
+			if (state == "ON")
 				val = 1;
-			else if (request->content.string() == "OFF")
+			else if (state == "OFF")
 				val = 0;
 			else
 				val = -1;
-			if (val > -1) {
+			if (val != -1) {
 				pinboard.getPin(3)->set(val);
 				log_message("User switched light2", 'S', logger);
 				*response << "HTTP/1.1 200 OK\r\nContent-Length: " << 5 << "\r\n\r\n" << val
@@ -114,13 +116,14 @@ shServer::shServer(PinCtrl &pinboard, int port) : loggedIPs{} {
 	{
 		if (authenticated(request->remote_endpoint_address)) {
 			int val;
-			if (request->content.string() == "OPEN")
+			std::string state = request->content.string();
+			if (state == "OPEN")
 				val = 0;
-			else if (request->content.string() == "CLOSE")
+			else if (state == "CLOSE")
 				val = 1;
 			else
 				val = -1;
-			if (val > -1) {
+			if (val != -1) {
 				pinboard.getPin(4)->set(val);
 				log_message("User opened/closed the door", 'S', logger);
 				*response << "HTTP/1.1 200 OK\r\nContent-Length: " << 5 << "\r\n\r\n" << val
