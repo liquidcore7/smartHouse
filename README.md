@@ -1,8 +1,8 @@
 # smartHouse
 ### Simple server to control RaspberryPi-driven house
 
-#API
-#####You can control your house with GET and POST requests to the server.
+# API
+##### You can control your house with GET and POST requests to the server.
 Avaliable requests:
   * /auth (**POST**) : log in. Default password is *raspHouse*, you can change it in server/smartHouseApi.hpp:10
   * /try (**GET**) : test connection
